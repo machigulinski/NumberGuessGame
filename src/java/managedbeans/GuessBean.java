@@ -18,33 +18,59 @@ import service.GuessingService;
  *
  * @author Machi
  */
-@Named
+@Named("guessBean")
 @SessionScoped
-public class GuessBean implements Serializable {
-    
-    
+public class GuessBean implements Serializable {    
+    private String result;
     private int playerNumber;
-    private boolean success = false;
+    private int randomNumber;
+    private int numOfGuesses = 0;
+    private boolean gameOn = true;
+    
     
     @Inject
-    private GuessingService guessingService;
+    private GuessingService gns;
     /**
      * Creates a new instance of GuessBean
      */
     public GuessBean() {}
     
     public String checkGuess(){
+	if(gameOn == false){
+            randomNumber = this.generateRandomNumber();
+            gameOn = true;
+            gns.setGameOn(gameOn);
+        }
+	
+	gns.guessNumber(randomNumber, playerNumber);
+	result = gns.getResult();
+	gameOn = gns.isGameOn();
+	
+	if (gameOn) {	    
+	    result = "Your guess is too " + result + "Try again.";	
+	} else {
+	    result = "YEY, YOU  DID IT!";
+	    
+	}
+	
 	
 	
 	
 		
-	return "result";
+	return null;
     
     }
+    
+    
+    public String startGame() {	
+	randomNumber = this.generateRandomNumber();
+	return null;
+    }
 
-    public static int generateRandomNumber() {	
+    private int generateRandomNumber() {	
 	Random rand = new Random();
-	return rand.nextInt((10 - 1) + 1) + 1;	
+	return rand.nextInt(10)+1;	
+	
     }
 
     public int getPlayerNumber() {
@@ -57,6 +83,7 @@ public class GuessBean implements Serializable {
     
     
     public static void main(String[] args) {
-	System.out.println(generateRandomNumber());
+	GuessBean gb = new GuessBean();
+	System.out.println(gb.generateRandomNumber());
     }
 }

@@ -13,23 +13,31 @@
 	<br/>
 	<h:messages/>
 	<h:form id="number_form">
-	    
+
 	    <h:panelGrid columns="2">
 		<h:outputText value="ENTER YOUR NUMBER" />
-		
-		<h:inputText id="txtplayNumber" value="#{GuessBean.playerNumber}" 
+
+		<h:inputText id="txtplayNumber" value="#{guessBean.playerNumber}" 
 			     required="true"
 			     requiredMessage="enter the number to play the game"/>
-		
-		<h:commandButton id="btnGuess" value="GUESS" action="#{GuessBean.checkGuess()}" />				
+
+		<h:commandButton id="btnGuess" value="GUESS" action="#{guessBean.checkGuess()}" />				
 	    </h:panelGrid>	    
-	    
-	    <h:panelGrid>
+
+	    <h:panelGrid columns="3">
+
+		<h:outputText/>	
 		
-	
-	    
+		<h:outputText value="Guesses Count: #{guessBean.numberOfGuesses}" style="color: blue;"/>
+		<h:outputText value="Most Attempts: #{guessBean.mostGuesses}" style="color: red;"/>
+		<h:outputText value="Fewest Attempts: #{guessBean.fewestGuesses}" style="color: green;"/>
+
+
+		<h:outputText/>
+	    </h:panelGrid>
+
 	</h:form>
-	
+
     </h:body>
 </html>
 
