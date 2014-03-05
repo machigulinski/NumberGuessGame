@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Number Guess Game</title>
+    </h:head>
+    <h:body>
+	<h2>Welcome to GUESS-A-NUMBER</h2>
+	<h:outputText value="To play the game you have to guess randomly chosen number between 1 and 10."/>
+	<br/>
+	<h:outputText value="Good luck!"/>
+	<br/>
+	<h:messages/>
+	<h:form id="number_form">
+	    
+	    <h:panelGrid columns="2">
+		<h:outputText value="ENTER YOUR NUMBER" />
+		
+		<h:inputText id="txtplayNumber" value="#{GuessBean.playerNumber}" 
+			     required="true"
+			     requiredMessage="enter the number to play the game"/>
+		
+		<h:commandButton id="btnGuess" value="GUESS" action="#{GuessBean.checkGuess()}" />				
+	    </h:panelGrid>	    
+	    
+	    <h:panelGrid>
+		
+	
+	    
+	</h:form>
+	
+    </h:body>
+</html>
+
