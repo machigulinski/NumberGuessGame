@@ -14,26 +14,29 @@
 	<h:messages/>
 	<h:form id="number_form">
 
-	    <h:panelGrid columns="2">
-		<h:outputText value="ENTER YOUR NUMBER" />
 
+	    <p>
+		<h:outputText value="ENTER YOUR NUMBER: " />
 		<h:inputText id="txtplayNumber" value="#{guessBean.playerNumber}" 
 			     required="true"
 			     requiredMessage="enter the number to play the game"/>
+		<h:commandButton id="btnGuess" value="GUESS" action="#{guessBean.checkGuess()}" style="margin-left: 2em;" />
+	    </p>
+	    <p>
 
-		<h:commandButton id="btnGuess" value="GUESS" action="#{guessBean.checkGuess()}" />				
-	    </h:panelGrid>	    
-
-	    <h:panelGrid columns="3">
-
-		<h:outputText/>	
+		<h:commandButton id="btnNewGame" value="START NEW GAME" action="#{guessBean.startGame()}" />
 		
-		<h:outputText value="Guesses Count: #{guessBean.numberOfGuesses}" style="color: blue;"/>
-		<h:outputText value="Most Attempts: #{guessBean.mostGuesses}" style="color: red;"/>
-		<h:outputText value="Fewest Attempts: #{guessBean.fewestGuesses}" style="color: green;"/>
+	    </p>
+
+	    <h2> <h:outputText value="#{guessBean.getResult()}" style="color: activeborder;"/></h2>
+
+	    <h:panelGrid columns="3" width="600">
 
 
-		<h:outputText/>
+		<h:outputText value="Guesses Count: #{guessBean.getNumOfGuesses()}" style="color: blue;"/>
+		<h:outputText value="Most Attempts: #{guessBean.maxNumOfGuesses}" style="color: red;"/>
+		<h:outputText value="Fewest Attempts: #{guessBean.minNumOfGuesses}" style="color: green;"/>
+
 	    </h:panelGrid>
 
 	</h:form>
