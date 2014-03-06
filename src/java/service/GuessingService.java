@@ -16,14 +16,13 @@ public class GuessingService implements Serializable {
 	String msg;
 	if (playerNumber < randomNumber) {
 	    msg = "low";
-	    numOfGuesses++;
 	} else if (playerNumber > randomNumber) {
 	    msg = "high";
-	    numOfGuesses++;
 	} else {
 	    msg = "match";
 	    gameOn = false;
 	}
+	numOfGuesses++;
 	this.result = msg;
     }
 

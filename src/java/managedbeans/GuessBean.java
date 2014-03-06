@@ -28,7 +28,7 @@ public class GuessBean implements Serializable {
     private int maxNumOfGuesses= 0;
     private int minNumOfGuesses = 0;
     private boolean gameOn = false;
-    
+    private boolean showStartBtn = false;
     
     @Inject
     private GuessingService gns;
@@ -55,21 +55,30 @@ public class GuessBean implements Serializable {
 	} else {
 	    result = "Yey, YOU  DID IT!";
 	    this.setMinMaxGuesses();
+	    this.setShowStartBtn(true);
+	       
 	}		
 	return null;    
     }
     
     private void setMinMaxGuesses(){
+		
+	if(minNumOfGuesses == 0 || minNumOfGuesses > numOfGuesses ) {
+	    setMinNumOfGuesses(numOfGuesses);	
+	}
+	    
+	if(maxNumOfGuesses == 0 || maxNumOfGuesses < numOfGuesses ) {
+	    setMaxNumOfGuesses(numOfGuesses);	
 	
-    
-    }
-  
+	}
+    }  
     
     
     public String startGame() {	
 	randomNumber = this.generateRandomNumber();
 	this.setPlayerNumber(0);
 	this.setNumOfGuesses(0);
+	this.gns.setNumOfGuesses(0);
 	this.setResult(null);
 	return null;
     }
@@ -134,6 +143,22 @@ public class GuessBean implements Serializable {
 
     public void setGameOn(boolean gameOn) {
 	this.gameOn = gameOn;
+    }
+
+    public boolean isShowStartBtn() {
+	return showStartBtn;
+    }
+
+    public void setShowStartBtn(boolean showStartBtn) {
+	this.showStartBtn = showStartBtn;
+    }
+
+    public GuessingService getGns() {
+	return gns;
+    }
+
+    public void setGns(GuessingService gns) {
+	this.gns = gns;
     }
     
     
