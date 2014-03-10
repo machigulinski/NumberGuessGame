@@ -7,7 +7,6 @@
 package managedbeans;
 
 import java.io.Serializable;
-import java.util.Random;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,7 +24,7 @@ public class GuessBean implements Serializable {
     private int playerNumber;
     private int randomNumber;
     private int numOfGuesses = 0;
-    private int maxNumOfGuesses= 0;
+    private int maxNumOfGuesses = 0;
     private int minNumOfGuesses = 0;
     private boolean gameOn = false;
     private boolean showStartBtn = false;
@@ -37,9 +36,9 @@ public class GuessBean implements Serializable {
      */
     public GuessBean() {}
     
-    public String checkGuess(){
+    public void checkGuess(){
 	if(!gameOn){
-            randomNumber = this.generateRandomNumber();
+            randomNumber = gns.generateRandomNumber();
             gameOn = true;
             gns.setGameOn(gameOn);
         }
@@ -58,7 +57,7 @@ public class GuessBean implements Serializable {
 	    this.setShowStartBtn(true);
 	       
 	}		
-	return null;    
+	//return null;    
     }
     
     private void setMinMaxGuesses(){
@@ -68,25 +67,18 @@ public class GuessBean implements Serializable {
 	}
 	    
 	if(maxNumOfGuesses == 0 || maxNumOfGuesses < numOfGuesses ) {
-	    setMaxNumOfGuesses(numOfGuesses);	
-	
+	    setMaxNumOfGuesses(numOfGuesses);		
 	}
     }  
     
     
     public String startGame() {	
-	randomNumber = this.generateRandomNumber();
+	randomNumber = gns.generateRandomNumber();
 	this.setPlayerNumber(0);
 	this.setNumOfGuesses(0);
 	this.gns.setNumOfGuesses(0);
 	this.setResult(null);
 	return null;
-    }
-
-    private int generateRandomNumber() {	
-	Random rand = new Random();
-	return rand.nextInt(10)+1;	
-	
     }
 
     public int getPlayerNumber() {
@@ -160,10 +152,5 @@ public class GuessBean implements Serializable {
     public void setGns(GuessingService gns) {
 	this.gns = gns;
     }
-    
-    
-    public static void main(String[] args) {
-	GuessBean gb = new GuessBean();
-	System.out.println(gb.generateRandomNumber());
-    }
+       
 }

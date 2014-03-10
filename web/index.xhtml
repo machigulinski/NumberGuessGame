@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Number Guess Game</title>
     </h:head>
@@ -20,7 +21,10 @@
 		<h:inputText id="txtplayNumber" value="#{guessBean.playerNumber}" 
 			     required="true"
 			     requiredMessage="enter the number to play the game"/>
-		<h:commandButton id="btnGuess" value="GUESS" action="#{guessBean.checkGuess()}" style="margin-left: 2em;" />
+		<h:commandButton id="btnGuess" value="GUESS" action="#{guessBean.checkGuess()}" style="margin-left: 2em;" >
+		    <f:ajax event="click" listener="#{guessBean.checkGuess()}" render="guessResult guessCount guessMin guessMax" />
+		    		    
+		</h:commandButton>
 	    </p>
 	    <p>
 
@@ -28,17 +32,16 @@
 		
 	    </p>
 
-	    <h2> <h:outputText value="#{guessBean.result}" style="color: activeborder;"/></h2>
+	    <h2> <h:outputText id="guessResult" value="#{guessBean.result}" style="color: activeborder;"/></h2>
 
 	    <h:panelGrid columns="3" width="600">
 
 
-		<h:outputText value="Guesses Count: #{guessBean.numOfGuesses}" style="color: blue;"/>
-		<h:outputText value="Most Attempts: #{guessBean.maxNumOfGuesses}" style="color: red;"/>
-		<h:outputText value="Fewest Attempts: #{guessBean.minNumOfGuesses}" style="color: green;"/>
+		<h:outputText id="guessCount" value="Guesses Count: #{guessBean.numOfGuesses}" style="color: blue;"/>
+		<h:outputText id="guessMax" value="Most Attempts: #{guessBean.maxNumOfGuesses}" style="color: red;"/>
+		<h:outputText id="guessMin" value="Fewest Attempts: #{guessBean.minNumOfGuesses}" style="color: green;"/>
 
 	    </h:panelGrid>
-
 	</h:form>
 
     </h:body>

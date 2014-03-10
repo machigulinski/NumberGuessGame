@@ -1,6 +1,7 @@
 package service;
 
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  *
@@ -24,6 +25,12 @@ public class GuessingService implements Serializable {
 	}
 	numOfGuesses++;
 	this.result = msg;
+    }
+    
+     public int generateRandomNumber() {	
+	Random rand = new Random();
+	return rand.nextInt(10)+1;	
+	
     }
 
     public String getResult() {
